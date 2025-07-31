@@ -1,0 +1,1003 @@
+# M.ads - منصة الألعاب القانونية المجانية المتكاملة (ملف HTML نهائي)
+
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M.ads - أكبر منصة ألعاب عربية مجانية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #0f0f1a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #000;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #FFD700, #ff9900);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Navigation */
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: #FFD700;
+        }
+        
+        .nav-link.active {
+            background: rgba(255, 215, 0, 0.1);
+            color: #FFD700;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 3px;
+            background: #FFD700;
+            border-radius: 3px;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .btn-primary {
+            background: #FFD700;
+            color: #000;
+        }
+        
+        .btn-primary:hover {
+            background: #ffc400;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: #FFD700;
+            border: 2px solid #FFD700;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 215, 0, 0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #FFD700, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #dddddd;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .btn-lg {
+            padding: 0.8rem 1.8rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Featured Games */
+        .section {
+            padding: 5rem 5%;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #FFD700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 70%;
+            height: 4px;
+            background: linear-gradient(to right, #FFD700, transparent);
+            border-radius: 2px;
+        }
+        
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .game-card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+        
+        .game-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .game-content {
+            padding: 1.5rem;
+        }
+        
+        .game-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #FFD700;
+        }
+        
+        .game-description {
+            color: #aaaaaa;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .game-rating {
+            color: #FFD700;
+        }
+        
+        .game-size {
+            color: #aaaaaa;
+        }
+        
+        .game-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Categories Section */
+        .categories {
+            background: #16213e;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .category-card {
+            background: rgba(255, 215, 0, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            color: #FFD700;
+            margin-bottom: 1rem;
+        }
+        
+        .category-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        
+        /* Apps Section */
+        .apps-section {
+            background: #1a1a2e;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+            text-align: center;
+            padding: 4rem 5%;
+        }
+        
+        .newsletter-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #FFD700;
+        }
+        
+        .newsletter-subtitle {
+            color: #aaaaaa;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem 1.2rem;
+            border: none;
+            border-radius: 8px 0 0 8px;
+            font-size: 1rem;
+            background: #2a2a42;
+            color: #ffffff;
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+            background: #3a3a5a;
+        }
+        
+        .newsletter-btn {
+            padding: 0.8rem 1.8rem;
+            background: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-btn:hover {
+            background: #ffc400;
+        }
+        
+        /* Footer */
+        footer {
+            background: #0f0f1a;
+            padding: 4rem 5% 2rem;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            color: #FFD700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #FFD700;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #aaaaaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #FFD700;
+            padding-right: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFD700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #666666;
+            font-size: 0.9rem;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #FFD700;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .section {
+                padding: 4rem 5%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 8px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                border-radius: 8px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        /* Dark/Light Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 999;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Light Mode Styles */
+        body.light-mode {
+            background: #f5f5f5;
+            color: #333333;
+        }
+        
+        body.light-mode header {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-mode .nav-link {
+            color: #555555;
+        }
+        
+        body.light-mode .nav-link:hover {
+            color: #000000;
+        }
+        
+        body.light-mode .game-card,
+        body.light-mode .category-card {
+            background: #ffffff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-mode .game-title,
+        body.light-mode .category-title,
+        body.light-mode .section-title,
+        body.light-mode .newsletter-title,
+        body.light-mode .footer-column h3 {
+            color: #000000;
+        }
+        
+        body.light-mode .game-description,
+        body.light-mode .hero-subtitle,
+        body.light-mode .newsletter-subtitle,
+        body.light-mode .footer-links a {
+            color: #666666;
+        }
+        
+        body.light-mode .footer-links a:hover {
+            color: #000000;
+        }
+        
+        body.light-mode footer {
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo">M</div>
+            <div class="logo-text">M.ads</div>
+        </div>
+        
+        <nav class="nav-links">
+            <a href="#home" class="nav-link active">الرئيسية</a>
+            <a href="#games" class="nav-link">الألعاب</a>
+            <a href="#apps" class="nav-link">التطبيقات</a>
+            <a href="#categories" class="nav-link">التصنيفات</a>
+            <a href="#about" class="nav-link">عن المنصة</a>
+            <a href="#contact" class="nav-link">اتصل بنا</a>
+        </nav>
+        
+        <div class="auth-buttons">
+            <button class="btn btn-outline">تسجيل الدخول</button>
+            <button class="btn btn-primary">إنشاء حساب</button>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content fade-in">
+            <h1 class="hero-title">أكبر منصة ألعاب عربية مجانية</h1>
+            <p class="hero-subtitle">اكتشف أكثر من 1000 لعبة وتطبيق مجاني قانوني لجميع المنصات. انضم إلى مجتمعنا المكون من ملايين اللاعبين العرب.</p>
+            
+            <div class="hero-buttons">
+                <button class="btn btn-primary btn-lg">
+                    <i class="fas fa-gamepad"></i> تصفح الألعاب
+                </button>
+                <button class="btn btn-outline btn-lg">
+                    <i class="fas fa-download"></i> كيف تعمل المنصة؟
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Games -->
+    <section class="section" id="games">
+        <h2 class="section-title">ألعاب مميزة</h2>
+        
+        <div class="games-grid">
+            <!-- Game 1 -->
+            <div class="game-card fade-in">
+                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/413150/header.jpg" alt="لعبة Stardew Valley" class="game-image">
+                <div class="game-content">
+                    <h3 class="game-title">Stardew Valley</h3>
+                    <p class="game-description">لعبة محاكاة مزرعة رائعة مع عناصر RPG. أنشئ مزرعتك، ابني علاقات مع السكان، واستكشف الكهوف.</p>
+                    <div class="game-meta">
+                        <span class="game-rating">⭐️⭐️⭐️⭐️⭐️ (4.9)</span>
+                        <span class="game-size">500MB</span>
+                    </div>
+                    <div class="game-actions">
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-download"></i> تحميل
+                        </button>
+                        <button class="btn btn-outline btn-sm">
+                            <i class="far fa-heart"></i> المفضلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Game 2 -->
+            <div class="game-card fade-in">
+                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/105600/header.jpg" alt="لعبة Terraria" class="game-image">
+                <div class="game-content">
+                    <h3 class="game-title">Terraria</h3>
+                    <p class="game-description">لعبة مغامرات ساندبوكس ثنائية الأبعاد مع عناصر البناء والاستكشاف والقتال.</p>
+                    <div class="game-meta">
+                        <span class="game-rating">⭐️⭐️⭐️⭐️☆ (4.7)</span>
+                        <span class="game-size">200MB</span>
+                    </div>
+                    <div class="game-actions">
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-download"></i> تحميل
+                        </button>
+                        <button class="btn btn-outline btn-sm">
+                            <i class="far fa-heart"></i> المفضلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Game 3 -->
+            <div class="game-card fade-in">
+                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/322330/header.jpg" class="game-image" alt="لعبة Don't Starve">
+                <div class="game-content">
+                    <h3 class="game-title">Don't Starve</h3>
+                    <p class="game-description">لعبة بقاء في عالم غريب وغامض مع رسومات فريدة من نوعها وتحديات ممتعة.</p>
+                    <div class="game-meta">
+                        <span class="game-rating">⭐️⭐️⭐️⭐️ (4.3)</span>
+                        <span class="game-size">300MB</span>
+                    </div>
+                    <div class="game-actions">
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-download"></i> تحميل
+                        </button>
+                        <button class="btn btn-outline btn-sm">
+                            <i class="far fa-heart"></i> المفضلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Game 4 -->
+            <div class="game-card fade-in">
+                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/233350/header.jpg" class="game-image" alt="لعبة Dota 2">
+                <div class="game-content">
+                    <h3 class="game-title">Dota 2</h3>
+                    <p class="game-description">لعبة MOBA مجانية شهيرة من تطوير Valve، مع بطولات عالمية وجوائز ضخمة.</p>
+                    <div class="game-meta">
+                        <span class="game-rating">⭐️⭐️⭐️⭐️☆ (4.6)</span>
+                        <span class="game-size">15GB</span>
+                    </div>
+                    <div class="game-actions">
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-download"></i> تحميل
+                        </button>
+                        <button class="btn btn-outline btn-sm">
+                            <i class="far fa-heart"></i> المفضلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Categories Section -->
+    <section class="section categories" id="categories">
+        <h2 class="section-title">تصفح حسب التصنيف</h2>
+        
+        <div class="categories-grid">
+            <!-- Category 1 -->
+            <div class="category-card fade-in">
+                <div class="category-icon">
+                    <i class="fas fa-running"></i>
+                </div>
+                <h3 class="category-title">ألعاب الحركة</h3>
+            </div>
+            
+            <!-- Category 2 -->
+            <div class="category-card fade-in">
+                <div class="category-icon">
+                    <i class="fas fa-chess"></i>
+                </div>
+                <h3 class="category-title">ألعاب الإستراتيجية</h3>
+            </div>
+            
+            <!-- Category 3 -->
+            <div class="category-card fade-in">
+                <div class="category-icon">
+                    <i class="fas fa-puzzle-piece"></i>
+                </div>
+                <h3 class="category-title">ألعاب الألغاز</h3>
+            </div>
+            
+            <!-- Category 4 -->
+            <div class="category-card fade-in">
+                <div class="category-icon">
+                    <i class="fas fa-car"></i>
+                </div>
+                <h3 class="category-title">سباقات السيارات</h3>
+            </div>
+            
+            <!-- Category 5 -->
+            <div class="category-card fade-in">
+                <div class="category-icon">
+                    <i class="fas fa-ghost"></i>
+                </div>
+                <h3 class="category-title">ألعاب الرعب</h3>
+            </div>
+            
+            <!-- Category 6 -->
+            <div class="category-card fade-in">
+                <div class="category-icon">
+                    <i class="fas fa-futbol"></i>
+                </div>
+                <h3 class="category-title">ألعاب رياضية</h3>
+            </div>
+            
+            <!-- Category 7 -->
+            <div class="category-card fade-in">
+                <div class="category-icon">
+                    <i class="fas fa-user-ninja"></i>
+                </div>
+                <h3 class="category-title">ألعاب القتال</h3>
+            </div>
+            
+            <!-- Category 8 -->
+            <div class="category-card fade-in">
+                <div class="category-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3 class="category-title">ألعاب المغامرات</h3>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Apps Section -->
+    <section class="section apps-section" id="apps">
+        <h2 class="section-title">تطبيقات الجوال المميزة</h2>
+        
+        <div class="games-grid">
+            <!-- App 1 -->
+            <div class="game-card fade-in">
+                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg" alt="تطبيق Among Us" class="game-image">
+                <div class="game-content">
+                    <h3 class="game-title">Among Us</h3>
+                    <p class="game-description">لعبة اجتماعية ممتعة حيث يتعين عليك اكتشاف المحتالين بين أفراد الطاقم.</p>
+                    <div class="game-meta">
+                        <span class="game-rating">⭐️⭐️⭐️⭐️☆ (4.5)</span>
+                        <span class="game-size">250MB</span>
+                    </div>
+                    <div class="game-actions">
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-download"></i> تحميل
+                        </button>
+                        <button class="btn btn-outline btn-sm">
+                            <i class="far fa-heart"></i> المفضلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- App 2 -->
+            <div class="game-card fade-in">
+                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/8500/header.jpg" alt="تطبيق Brawlhalla" class="game-image">
+                <div class="game-content">
+                    <h3 class="game-title">Brawlhalla</h3>
+                    <p class="game-description">لعبة قتال مجانية متعددة اللاعبين مع شخصيات متنوعة وأسلوب لعب سريع.</p>
+                    <div class="game-meta">
+                        <span class="game-rating">⭐️⭐️⭐️⭐️ (4.2)</span>
+                        <span class="game-size">300MB</span>
+                    </div>
+                    <div class="game-actions">
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-download"></i> تحميل
+                        </button>
+                        <button class="btn btn-outline btn-sm">
+                            <i class="far fa-heart"></i> المفضلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- App 3 -->
+            <div class="game-card fade-in">
+                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/945360/header.jpg" alt="تطبيق Genshin Impact" class="game-image">
+                <div class="game-content">
+                    <h3 class="game-title">Genshin Impact</h3>
+                    <p class="game-description">لعبة أكشن RPG مفتوحة العالم مع جرافيك مذهل وقصص شيقة.</p>
+                    <div class="game-meta">
+                        <span class="game-rating">⭐️⭐️⭐️⭐️☆ (4.7)</span>
+                        <span class="game-size">8GB</span>
+                    </div>
+                    <div class="game-actions">
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-download"></i> تحميل
+                        </button>
+                        <button class="btn btn-outline btn-sm">
+                            <i class="far fa-heart"></i> المفضلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- App 4 -->
+            <div class="game-card fade-in">
+                <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/976730/header.jpg" alt="تطبيق Hearthstone" class="game-image">
+                <div class="game-content">
+                    <h3 class="game-title">Hearthstone</h3>
+                    <p class="game-description">لعبة أوراق استراتيجية سريعة الخطى مليئة بالمرح والتكتيكات.</p>
+                    <div class="game-meta">
+                        <span class="game-rating">⭐️⭐️⭐️⭐️ (4.3)</span>
+                        <span class="game-size">3GB</span>
+                    </div>
+                    <div class="game-actions">
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-download"></i> تحميل
+                        </button>
+                        <button class="btn btn-outline btn-sm">
+                            <i class="far fa-heart"></i> المفضلة
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <h2 class="newsletter-title">اشترك في نشرتنا البريدية</h2>
+        <p class="newsletter-subtitle">احصل على آخر التحديثات والعروض الخاصة مباشرة إلى بريدك الإلكتروني</p>
+        
+        <form class="newsletter-form">
+            <input type="email" placeholder="أدخل بريدك الإلكتروني" class="newsletter-input" required>
+            <button type="submit" class="newsletter-btn">اشتراك</button>
+        </form>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h3>عن M.ads</h3>
+                <p>منصة الألعاب العربية الرائدة التي توفر تجربة لعب فريدة مع آلاف الألعاب المجانية القانونية.</p>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>الأقسام</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#games">الألعاب</a></li>
+                    <li><a href="#apps">التطبيقات</a></li>
+                    <li><a href="#categories">التصنيفات</a></li>
+                    <li><a href="#">الأكثر تحميلاً</a></li>
+                    <li><a href="#">الإصدارات الجديدة</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>روابط مفيدة</h3>
+                <ul class="footer-links">
+                    <li><a href="#">الأسئلة الشائعة</a></li>
+                    <li><a href="#">سياسة الخصوصية</a></li>
+                    <li><a href="#">شروط الاستخدام</a></li>
+                    <li><a href="#">سياسة الإرجاع</a></li>
+                    <li><a href="#">دعم العملاء</a></li>
+                    <li><a href="#">وظائف شاغرة</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>اتصل بنا</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> الرياض، المملكة العربية السعودية</li>
+                    <li><i class="fas fa-phone"></i> +966 12 345 6789</li>
+                    <li><i class="fas fa-envelope"></i> info@mads.com</li>
+                    <li><i class="fas fa-clock"></i> الأحد - الخميس: 9ص -
